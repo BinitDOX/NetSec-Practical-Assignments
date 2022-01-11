@@ -3,6 +3,10 @@ import threading
 import imageio
 from PIL import Image, ImageTk
 
+# This was an external dependency, but modified to suit needs for delays
+# This read a video, into frames and displays each frame / image in a tkinter label widget
+# Hence requires another thread
+
 class TKVideo():
     def __init__(self, path, label, loop = 0, size=(640,360), start_after=0, delay=0):
         self.path = path
