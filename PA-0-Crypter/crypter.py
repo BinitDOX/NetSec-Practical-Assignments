@@ -11,14 +11,14 @@ class Crypter:
         if len(m) == 0:  # Check for empty input
             self.error = '(-) ERR: Empty input'
             return False
-        if not m.isalpha():  # Check for non-alpha input
+        if not all(x.isalpha() or x.isspace() for x in m):  # Check for non-alpha input
             self.error = '(-) ERR: Non-alphabetic input'
             return False
         return True  # Return true if all checks pass
 
     # Main encrypter / decrypter
     def __crypt(self, m):  # Algo: Just like for 10 numbers 2 is invert of 8, here, ascii(A) is invert of [26 - ascii(A)] = ascii(Z) (ord = ascii)
-        return ''.join([chr(ord('a') + abs(ord(x) - ord('a') - 25)) if ord(x) >= ord('a') else chr(ord('A') + abs(ord(x) - ord('A') - 25)) for x in m])
+        return ''.join([chr(ord('a') + abs(ord(x) - ord('a') - 25)) if ord(x) >= ord('a') else chr(ord('A') + abs(ord(x) - ord('A') - 25)) for x in m]).replace('{', ' ')
     # Let's take dry run for a character say 'B' in string m:
     # ascii('B') is less than ascii('a') so segment after else is exec -> chr(ord('A') + abs(ord(x) - ord('A') - 25))
     # -> chr(65 + abs(66 - 65) - 25)
